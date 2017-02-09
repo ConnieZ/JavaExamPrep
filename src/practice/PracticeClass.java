@@ -9,12 +9,18 @@ package practice;
 // This imports the static members of Ports interface, so
 // they can be referenced without interface name
 import static util.Ports.*;
-
-// This will additionally import the Ports interface, so 
-// we can use Ports classname with its members.
-// Technically this is sufficient and makes the previous import
-// redundant
+//This will additionally import the Ports interface, so 
+//we can use Ports classname with its members.
+//Technically this is sufficient and makes the previous import
+//redundant
 import util.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 public class PracticeClass {
 	
@@ -32,6 +38,10 @@ public class PracticeClass {
 	// short s1 = c1$;
 	
 	long e_2 = c1$;
+	
+	// this creates a two-layer array, both layers are assigned capacity
+	// use property length to access the length of the array
+	int[] times[] = new int[3][3];
 	
 	private String color;
 	
@@ -64,12 +74,32 @@ public class PracticeClass {
 		mammal.numberOfOffspring++;
 	}
 	
+	
 	// Method that will be passed a lambda expression
 	public static void check(Climb climb, int height){
 		if (climb.isTooHigh(height, 4))
-			System.out.println("too hight");
+			System.out.println("too high");
 		else 
 			System.out.println("ok");
+	}
+	
+	// Another method that will be passed a lambda expression
+	// The method has no parameters in this case, observe syntax
+	public static void caller(WalksOn4Legs w, int i){
+		
+		// Pay attention, because the if block is inside for loop
+		// the code with continue and break will compile
+		// However, if you remove the for loop, the code will not compile
+		for(int k = 0; k <= i; k++){
+			if(w.isWalking()){
+				System.out.println("Animal is walking");
+				continue;
+			}else{
+				// code after this line in for loop is unreachable, and won't compile
+				break;
+			}
+		}
+		System.out.println("Animal stopped walking");
 	}
 	
 	// This overrides the Object finalize method with no args
@@ -85,10 +115,20 @@ public class PracticeClass {
 		System.out.println("Object " + o.toString() + " is undergoing garbage collection");
 	}
 	
+	
+	/**
+	 * The famous main method, pay attention to how it's declared
+	 * @param args
+	 */
 	public static void main(String[] args) {
+		
 		
 		// using lambdas
 		check((h, l) -> h > l, 5);
+		
+		// using a lambda for a method with no parameters
+		// always make sure there's a parameter list and a returned value
+		caller(() -> true, 2);
 		
 		// Referencing Interface static members (see imports above)
 		System.out.println("Motors: " + Ports.RIGHT_MOTOR + ", " + LEFT_MOTOR);
@@ -102,6 +142,8 @@ public class PracticeClass {
 		
 		// This won't compile because String is not a superclass of Mammal
 		// new PracticeClass().noteNewOffspring((Mammal) new String());
+		
+		
 		
 		// Null can always be passed as reference,
 		// but it will cause NullPointerException at runtime
@@ -121,6 +163,13 @@ public class PracticeClass {
 		// This will print sum of two integers, not concatenated value
 		System.out.println(p.b1 + p.c1$);
 		
+		// This won't compile, because that's not a correct way of accessing
+		// array elements
+		// int arrElement = p.times[2,5];
+		
+		// This will compile but throw a ArrayOutOfBoundsException at runtime
+		// int arrElement = p.times[2][5];
+		
 		String result;
 		result = getName();
 		System.out.println(result);
@@ -137,6 +186,18 @@ public class PracticeClass {
 		System.gc();
 		// At this time the finalize() method will be called
 		
+		// The line of code won't compile with just 2 args
+		LocalDate d = LocalDate.of(2015, 5, 1);
+		Period period = Period.of(1, 2, 3);
+		d = d.minus(period);
+		// LocalTime, LocalDate, Period, etc. need an import of java.time package
+		LocalTime lt = LocalTime.of(17, 30, 20);
+	    LocalDateTime ldt = LocalDateTime.of(d, lt);
+	    // DateTimeFormatter will only work with a LocalDateTime object
+		DateTimeFormatter f = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+		// This line throws an exception, if you try to 
+		// use DateTimeFormatter with just LocalDate
+		 System.out.println(f.format(ldt));
 	}
 
 }
