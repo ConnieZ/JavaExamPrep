@@ -1,9 +1,13 @@
 package practice;
 
-public class Antelope extends Mammal implements WalksOn4Legs {
+public class Antelope extends Mammal implements WalksOn4Legs, WearsHorns {
 	public boolean isWalking(){
 		System.out.println("Antelope is walking");
 		return true;
+	}
+	
+	public int getNumberOfHorns(){
+		return 2;
 	}
 	
 	// This is the simplest implementation of abstract parent method
@@ -14,8 +18,8 @@ public class Antelope extends Mammal implements WalksOn4Legs {
 	// This implementation uses a less restrictive access modifier - protected vs. default
 	protected Long getOffsprings(){
 		return (long) numberOfOffspring;
-	}
 	
+	}	
 	// This won't compile because we cannot reduce visibility of inherited method
 //	private Long getOffsprings(){
 //		return (long) numberOfOffspring;

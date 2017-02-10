@@ -143,7 +143,15 @@ public class PracticeClass {
 		// This won't compile because String is not a superclass of Mammal
 		// new PracticeClass().noteNewOffspring((Mammal) new String());
 		
-		
+		// We create a single object of type Antelope, but it will be referenced by
+		// different types of references
+		Mammal antelope = new Antelope();
+		// This compiles because WalksOn4Legs is a subclass of Object
+		WalksOn4Legs walksOn4Legs = (WalksOn4Legs) antelope;
+		WearsHorns wearsHorns = (WearsHorns) walksOn4Legs;
+		// The casts compile and succeed because Antelope implements these interfaces.
+		System.out.println(walksOn4Legs.isWalking());
+		System.out.println(wearsHorns.getNumberOfHorns());
 		
 		// Null can always be passed as reference,
 		// but it will cause NullPointerException at runtime
