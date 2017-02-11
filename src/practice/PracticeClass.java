@@ -125,6 +125,8 @@ public class PracticeClass {
 		
 		// using lambdas
 		check((h, l) -> h > l, 5);
+		// another way to call this with more details
+		check((int h, int l) -> {return h > l;}, 5);
 		
 		// using a lambda for a method with no parameters
 		// always make sure there's a parameter list and a returned value
@@ -152,6 +154,10 @@ public class PracticeClass {
 		// The casts compile and succeed because Antelope implements these interfaces.
 		System.out.println(walksOn4Legs.isWalking());
 		System.out.println(wearsHorns.getNumberOfHorns());
+		
+		// This won't compile because antelope is referenced by Mammal var
+		// And Mammal class doesn't have the method from Antelope class
+		// antelope.getEatenByLion();
 		
 		// Null can always be passed as reference,
 		// but it will cause NullPointerException at runtime
