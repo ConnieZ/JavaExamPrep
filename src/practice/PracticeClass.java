@@ -155,6 +155,11 @@ public class PracticeClass {
 		System.out.println(walksOn4Legs.isWalking());
 		System.out.println(wearsHorns.getNumberOfHorns());
 		
+		// Won't compile, needs casting to compile
+		// Antelope anty = antelope;
+		Antelope anty = (Antelope) antelope;
+		System.out.println("Anty points to same object as antelope: " + (antelope == anty) + " and " + (antelope.equals(anty)));
+		
 		// This won't compile because antelope is referenced by Mammal var
 		// And Mammal class doesn't have the method from Antelope class
 		// antelope.getEatenByLion();

@@ -8,8 +8,10 @@ import java.util.*;
 public class Chicken {
 	
 	private static int NUMBER_CHICKS;
+	// ArrayList to demo class methods
 	public List chickens = new ArrayList();
 	
+
 	public Chicken(){
 		NUMBER_CHICKS++;
 	}
@@ -49,6 +51,16 @@ public class Chicken {
 		// returns true, because primitive was autoboxed and we can refer to it by its wrapper class
 		chickens.contains(new Boolean(false));
 		chickens.contains(2);
+		
+		
+		// String[] chickNames; // this array object points to null, not an object, because it wasn't initialized
+		// String[] chickNames = new String[2]; // This array would have 2 elements that point to null, but have the potential to point to String
+		String [] chickNames = { "Petty", "Dory" };
+		Object[] objects = chickNames; // allowed, because Object[] is a superclass of String[]
+		String[] againStrings = (String[]) objects; //allowed and won't throw exception, because objects points to a String[] array
+		// againStrings[0] = new StringBuilder(); // DOES NOT COMPILE, because StringBuilder is not a String
+		objects[0] = new StringBuilder(); // careful, this will throw runtime exception, because StringBuilder is not a String
+		
 	}
 	
 	// This is an inner class, it can be static

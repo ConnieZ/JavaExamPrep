@@ -24,15 +24,29 @@ public class Antelope extends Mammal implements WalksOn4Legs, WearsHorns {
 		StringBuilder status2 = status.append("Status: ");
 		// Apparently, StringBuilder doesn't implement equals() method, so this will return false;
 		status.equals("Status: ");
-		// This returns false because a String object cannot reference the same object as on string pool
+		// This returns false because a non-compile time String object cannot reference the same object as on string pool
 		boolean compare = status.toString() == "Status: ";
 		// This won't compile because StringBuilder and String cannot be compared like this
 		// compare = status == "Status: ";
 		compare = status.equals("Status: ");
+		
+		// Unrelatedly
+		String a = "Some String";
+		String b = "Some String";
+		// Returns true, because a and b refer to the same String object on the String pool
+		compare = a == b;
+		
+		// Notice that substring for StringBuilder still returns a new String object and doesn't modify the StringBuilder object
+		String sub = status.substring(1,4);
+		// Notice how insert places the string at a position that doesn't exist
+		status.delete(6,8).insert(6, ": ");
 
-		// Notice how status2 and status now point to the same object, which keeps being modified.
+		// Notice how status2 and status in fact point to the same object, which keeps being modified.
 		status.replace(0, 8, "Current Status: ");
 		status2.delete(0, 8);
+		// This will return true, because the vars point to the same StringBuilder object
+		compare = status == status2;
+		
 		System.out.println(status.append("Antelope is walking"));
 		return true;
 	}
