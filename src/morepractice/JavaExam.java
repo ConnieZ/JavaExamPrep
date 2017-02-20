@@ -1,6 +1,8 @@
 package morepractice;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class JavaExam {
 
@@ -32,6 +34,12 @@ public class JavaExam {
 		// Notice, how we sorted by reference (the print method prints instance var
 		// but we sorted by calling the local var)
 		c.printCircusMembers(); // prints how the instance var looks after sorting
+		
+		// Binary search for element that isn't contained in array will return 
+		// a value one smaller than the negative of index where it should be inserted
+		// to preserve sorted order
+		System.out.println(Arrays.binarySearch(circusFolks, "SpinelessZiggy"));
+		// For unsorted arrays, the line will compile but return unpredictable results
 
 		// If you don't qualify the new Circus() , this error will be thrown
 //		No enclosing instance of type JavaExam is accessible. Must qualify the 
@@ -40,12 +48,31 @@ public class JavaExam {
 		Circus c2 = j.new Circus();
 		c2.printCircusMembers();
 		
+		// List is an interface, so you can assign ArrayList object to it, but not vice versa.
+		// Generics are optional here, but if you don't specify them, it defaults to Object
+		List<Circus> townCircuses = new ArrayList<>();
+		// This won't compile, because we declared this to be a String ArrayList only
+		//townCircuses.add("InvalidCircus");
+		
 		String g = "grep";
 		String p = g.replace("gr", "2two");
 		System.out.println(p);
 		String a = new String();
 		System.out.println(new String());
 		System.out.println(a.replace("", "b"));
+		
+		ArrayList magicianObjects = new ArrayList(); // this will only allow Objects, and any primitives will be autoboxed - promoted to wrapper classes
+		magicianObjects.add("AlbinoRabbit");  
+		magicianObjects.add(Boolean.TRUE); // this adds an object of wrapper class
+		// The max index for adding an element is equal to size of array, otherwise, it will throw exception at runtime.
+		magicianObjects.add(2, 42);
+		System.out.println(magicianObjects);
+		//System.out.println(magicianObjects.remove(42)); // this will attempt to remove the element at index 42 (no autoboxing rules for "remove")
+		System.out.println(magicianObjects.remove(true)); // removes the Boolean object
+		System.out.println(magicianObjects.remove("BlackRabbit"));
+		System.out.println(magicianObjects.size());
+
+		
 	}
 
 	
@@ -54,6 +81,18 @@ public class JavaExam {
 	class Circus extends Entertainment {
 		
 		String [] circusMembers = new String[] {"SpookyFace", "MadEye", "SharpTooth", "3EyeJackie"};
+		
+		int[] trick [], bigTrick [][]; // a 2 dimensional AND a 3 dimensional array
+		int[][] uglyTrick = {{1, 4}, {3}, {9,8,7}}; // array with different sizes of elements
+		
+		int [][] superUglyTrick = new int[4][]; // array with different sizes of elements
+		{		
+			// you cannot initialize an array after declaration outside a method
+			// it's because this counts as statement, and only declarations pass outside methods.
+			// but inside an initializer block, this passes ok
+			superUglyTrick[0] = new int[5];
+			superUglyTrick[1] = new int[3];
+		}
 		
 		// You have to implement all inherited methods from abstract classes and interfaces
 		// Otherwise the code won't compile
