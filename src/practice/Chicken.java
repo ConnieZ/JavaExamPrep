@@ -59,7 +59,7 @@ public class Chicken {
 		Object[] objects = chickNames; // allowed, because Object[] is a superclass of String[]
 		String[] againStrings = (String[]) objects; //allowed and won't throw exception, because objects points to a String[] array
 		// againStrings[0] = new StringBuilder(); // DOES NOT COMPILE, because StringBuilder is not a String
-		objects[0] = new StringBuilder(); // careful, this will throw runtime exception, because StringBuilder is not a String
+		//objects[0] = new StringBuilder(); // careful, this will throw runtime exception, because StringBuilder is not a String
 		
 	}
 	

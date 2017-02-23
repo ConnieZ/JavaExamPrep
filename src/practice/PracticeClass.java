@@ -18,6 +18,7 @@ import util.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Month;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -205,13 +206,23 @@ public class PracticeClass {
 		System.gc();
 		// At this time the finalize() method will be called
 		
+		
+		// LocalDate d = new LocalDate(); // There is no default constructor for LocalDate
+		LocalDate now = LocalDate.now();
 		// The line of code won't compile with just 2 args
 		LocalDate d = LocalDate.of(2015, 5, 1);
+		// LocalDate.of(2015, Month.JANUARY, 32); // throws DateTimeException of invalid DayOfMonth
+		LocalDate date1 = LocalDate.of(2015, Month.JANUARY, 20); // Month is also class from java.time package
+		
+		// Date objects are immutable, so remember to assign the result to a var
+		date1 = date1.plusWeeks(2); // same can be done with Days, Months, Years
+		//date1 = date1.minusMinutes(1); // DOES NOT COMPILE, because LocalDate doesn't have that method defined.
 		Period period = Period.of(1, 2, 3);
 		d = d.minus(period);
 		// LocalTime, LocalDate, Period, etc. need an import of java.time package
-		LocalTime lt = LocalTime.of(17, 30, 20);
-	    LocalDateTime ldt = LocalDateTime.of(d, lt);
+		LocalTime lt = LocalTime.of(17, 30, 20); // passing hours and minutes is mandatory, others are optional
+	    LocalDateTime ldt = LocalDateTime.of(d, lt); // passing LocalDate object, and LocalTime object
+	    ldt = ldt.minusHours(10);
 	    // DateTimeFormatter will only work with a LocalDateTime object
 		DateTimeFormatter f = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
 		// This line throws an exception, if you try to 

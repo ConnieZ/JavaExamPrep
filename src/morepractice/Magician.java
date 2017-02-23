@@ -1,6 +1,9 @@
 package morepractice;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Magician extends Person {
 	
@@ -32,12 +35,30 @@ public class Magician extends Person {
 		System.out.println("Find 42: " + magicianObjects.contains(42));
 		magicianObjects.add("HornedBunny");
 		magicianObjects.remove(true);
+		
 		// How to convert ArrayList to array
 		Object[] objectArray = magicianObjects.toArray();
 		System.out.println(objectArray.length); // 1
 		// Casting doesn't throw exception only if all objects in ArrayList are in fact Strings
 		String[] stringArray = (String[]) magicianObjects.toArray(new String[5]); // initial capacity can be 0
 		System.out.println(stringArray.length); // 5, but only first element is filled
+		
+		// How ArrayList objects are sorted, same method, but different helper class
+		magicianObjects.add("69LeggedSpider");
+		Collections.sort(magicianObjects);
+		System.out.println(magicianObjects);
+
+		
+		// Converting from an array to a List creates a backed List - array and list are linked
+		// When a change is made to one, it is available in the other. 
+		// The list is fixed-size, so no new elements can be added, and none can be removed.
+		// Think of it like this: "view array a AS LIST", but it's still an array
+		// Just that it has more API options: from array and from List (with exceptions)
+		List<String> fixedList = Arrays.asList(stringArray);
+		// This method also takes vararg as array, same rules apply
+		List<Object> fixedList2 = Arrays.asList("HornedBunny","AlbinoRabbit","Dove");
+		// fixedList2.remove("Dove"); // Throws java.lang.UnsupportedOperationException	
+		
 		
 	}
 	
