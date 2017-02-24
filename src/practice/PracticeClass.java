@@ -217,12 +217,23 @@ public class PracticeClass {
 		// Date objects are immutable, so remember to assign the result to a var
 		date1 = date1.plusWeeks(2); // same can be done with Days, Months, Years
 		//date1 = date1.minusMinutes(1); // DOES NOT COMPILE, because LocalDate doesn't have that method defined.
-		Period period = Period.of(1, 2, 3);
-		d = d.minus(period);
+		Period period = Period.of(1, -2, 3); // one year, two months, 3 days, all args required
+		Period fortnight = Period.ofWeeks(2);
+		d = d.minus(period); // could be plus(Period)
 		// LocalTime, LocalDate, Period, etc. need an import of java.time package
 		LocalTime lt = LocalTime.of(17, 30, 20); // passing hours and minutes is mandatory, others are optional
+	    // System.out.println(lt.plus(period)); // compiles but throws exception of unsupported method
+
 	    LocalDateTime ldt = LocalDateTime.of(d, lt); // passing LocalDate object, and LocalTime object
 	    ldt = ldt.minusHours(10);
+	    System.out.println("Day of week: " + ldt.getDayOfWeek());
+	    System.out.println("Day of year: " + ldt.getDayOfYear());
+	    
+	    // DateTimeFormatter requires java.time.format package
+	    
+	    System.out.println(date1.format(DateTimeFormatter.ISO_LOCAL_DATE));
+	    System.out.println(lt.format(DateTimeFormatter.ISO_LOCAL_TIME));
+	    System.out.println(ldt.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
 	    // DateTimeFormatter will only work with a LocalDateTime object
 		DateTimeFormatter f = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
 		// This line throws an exception, if you try to 
