@@ -237,8 +237,29 @@ public class PracticeClass {
 	    // DateTimeFormatter will only work with a LocalDateTime object
 		DateTimeFormatter f = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
 		// This line throws an exception, if you try to 
-		// use DateTimeFormatter with just LocalDate
-		 System.out.println(f.format(ldt));
+		// use DateTimeFormatter.ofLocalizedDateTime with just LocalDate
+		System.out.println(f.format(ldt));
+		// However you could use  DateTimeFormatter.ofLocalizedDate for both LocalDate and LocalDateTime
+		DateTimeFormatter shortDateTimeformat = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+		System.out.println(shortDateTimeformat.format(ldt)); 
+		System.out.println(shortDateTimeformat.format(date1)); 
+		// System.out.println(shortDateTimeformat.format(lt)); // throws unsupported format exception
+		
+		// Interestingly, the reverse order also works
+		System.out.println(ldt.format(shortDateTimeformat));
+		System.out.println(date1.format(shortDateTimeformat));
+		
+		// You can also create custom format
+		DateTimeFormatter customFormat = DateTimeFormatter.ofPattern("MMMM dd, yyyy, hh:mm");
+		System.out.println(ldt.format(customFormat)); 
+		DateTimeFormatter customTimeFormat = DateTimeFormatter.ofPattern("hh:mm");
+		System.out.println(customTimeFormat.format(ldt)); // works, dropping the date part, just displaying time
+		// customTimeFormat.format(date1); // throw exceptions because time piece is missing
+		System.out.println(customTimeFormat.format(lt));
+		
+		// Parsing
+		LocalDate parsedDate = LocalDate.parse("01 02 2015", DateTimeFormatter.ofPattern("MM dd yyyy"));
+		LocalTime parsedtime = LocalTime.parse("11:22");
 	}
 
 }
