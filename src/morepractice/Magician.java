@@ -7,7 +7,18 @@ import java.util.List;
 
 public class Magician extends Person {
 	
+	public int knownTricks;
+	
 	ArrayList magicianObjects = new ArrayList(); // this will only allow Objects, and any primitives will be autoboxed - promoted to wrapper classes
+	
+	public Magician(){
+		this(0);
+	}
+	
+	public Magician(int tricks){
+		super();
+		this.knownTricks = tricks;
+	}
 	
 	// This method demos ArrayList functionality
 	public void performMagicTrick(){

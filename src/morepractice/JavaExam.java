@@ -2,7 +2,9 @@ package morepractice;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Comparator;
 
 public class JavaExam {
 
@@ -86,6 +88,23 @@ public class JavaExam {
 		Magician magicMike = new Magician();
 		// This method demos more ArrayList functionality
 		magicMike.performMagicTrick();		
+		
+		ArrayList<Magician> magicians = new ArrayList<Magician>();
+		magicians.add(new Magician(4));
+		magicians.add(new Magician(44));
+		magicians.add(new Magician(2));
+		magicians.add(new Magician(14));
+		//List<Magician> listMagicians = magicians;
+		Collections.sort(magicians, new Comparator<Magician>() {
+		    public int compare(Magician m1, Magician m2) {
+		    	// sorts the objects based on attributed in descending order because of "-"
+		        return -new Integer(m1.knownTricks).compareTo(new Integer(m2.knownTricks));
+		    }
+		});
+		for(Magician m : magicians){
+			System.out.println(m.knownTricks);
+		}
+
 	}
 
 	
