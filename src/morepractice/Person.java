@@ -1,5 +1,11 @@
 package morepractice;
 
-public class Person {
+import java.time.LocalDate;
 
+public class Person {
+	public String name = "Person";
+	protected LocalDate dateOfBirth;
+	public String toString(){
+		return name;
+	}
 }
