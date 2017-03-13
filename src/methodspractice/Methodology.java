@@ -2,10 +2,30 @@ package methodspractice;
 
 import java.util.ArrayList;
 import java.util.List;
+//Static imports are for importing static members of classes only, and not the classes themselves.
+import static java.util.Arrays.asList; // that way you can avoid specifying Arrays. when using asList(), in fact Arrays.asList() won't compile
+// import static java.util.Arrays; // DOES NOT COMPILE
+// If we created an asList method in our class, Java would give it preference over the imported one
 
 import morepractice.Person;
 
 public class Methodology {
+	
+	//static final constants are named with all caps
+	public static final ArrayList<Integer> METHODS = new ArrayList<>(); // constants must be initialized 
+	
+	private static final int NUMBER_SECONDS_PER_HOUR; // it ok to postpone initialization until static initializer block
+	// Static initializers - a block of code with static keyword 
+	// They will be run when the class is first used.
+	static {
+		int numSecondsPerMinute = 60;
+		int numMinutesPerHour = 60;
+		NUMBER_SECONDS_PER_HOUR = numSecondsPerMinute * numMinutesPerHour;
+	}
+	//	There is a common case to use a static initializer: when you need to initialize a
+	//	static field and the code to do so requires more than one line. This often occurs
+	//	when you want to initialize a collection like an ArrayList. When you do need to
+	//	use a static initializer, put all the static initialization in the same block.
 	
 	// String walk6(int a) { if (a == 4) return ""; } // Doesn't compile because might not produce return
 	
@@ -17,7 +37,8 @@ public class Methodology {
 	
 	// Method names may only contain letters, numbers, $, or _
 	String $ReturnDollars_(){
-		return "$20";
+		int v = getLong(); // non-static calling another non-static method is legal, because eventually an object reference will be used
+		return "$" + v;
 	}
 	
 	// A vararg parameter must be the last element in a method’s parameter list. 
@@ -41,15 +62,22 @@ public class Methodology {
 		amy.name = "Amy";
 		// System.out.println(amy.dateOfBirth); // accessing a protected member, without extending the class or being in the same package fails.
 		
+		// Calling a static method from a static method (main) is legal
 		packForHoliday(jackie, "shorts", "jacket", "books");
 		packForHoliday(alice, new String[] {"sweather", "pijamas", "tablet"}); // passing an array is same as vargargs
 		packForHoliday(amy); // if we don't pass vargargs or array, Java creates one of length 0
 		// packForHoliday(amy, null); // compiles but throws NullPointerException, because method's body tries to access the null object
 
+		//$ReturnDollars_(); // cannot call a non-static method from a static method (main), need object reference
+		
 		Methodology m = new Methodology();
 		m = null;
 		// This compiles and doesn't throw NullPointerException, because for static methods Java replaces object ref with type of object
 		m.packForHoliday(new Person()); 
+		System.out.println("NUMBER_SECONDS_PER_HOUR " + NUMBER_SECONDS_PER_HOUR);
+		
+		METHODS.add(1); // you can actually call methods on the constant, but you can't point that reference to another object
+		// METHODS = new ArrayList<>(); doesn't compile
 		
 	}
 
