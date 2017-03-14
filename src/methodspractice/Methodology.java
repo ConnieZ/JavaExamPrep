@@ -22,10 +22,28 @@ public class Methodology {
 		int numMinutesPerHour = 60;
 		NUMBER_SECONDS_PER_HOUR = numSecondsPerMinute * numMinutesPerHour;
 	}
+	
 	//	There is a common case to use a static initializer: when you need to initialize a
 	//	static field and the code to do so requires more than one line. This often occurs
 	//	when you want to initialize a collection like an ArrayList. When you do need to
 	//	use a static initializer, put all the static initialization in the same block.
+	
+	private String cameleon = "Blue";
+	public void changeColor(String cameleon){
+		// this won't reassign the instance variable to a new value, it only affects the local variable
+		cameleon = "Green";
+		System.out.println("Inside the method, the cameleon is " + cameleon);
+	}
+	
+	
+	private String[] cameleons = new String[]{"Yellow", "Red"};
+	// an overloaded method is such because of different type and/or number of parameters
+	// but other things can also be changed, e.g. access modifiers, specifiers (like static), return types, and exception lists
+	// however they are irrelevant to overloading
+	private void changeColor(String[] cameleons){
+		// cameleons = new String[]{"Purple"}; // this would not reassign object to the instance array variable
+		cameleons[0] = "Purple"; // this, however, does reassign the object that the array element points to
+	}
 	
 	// String walk6(int a) { if (a == 4) return ""; } // Doesn't compile because might not produce return
 	
@@ -51,6 +69,21 @@ public class Methodology {
 		System.out.println(child.toString() + " is packed for holiday.");
 	}
 	
+	// This attempt at overloading doesn't compile, because essentially varargs is an array.
+	// private void packForHoliday(Person child, Object[] things){}  
+	
+	// this overloading works, because the assumption is that there will always be at least 2 args passed
+	// But it also implies that you can call packForHoliday(34), the value will be autoboxed to Integer
+	private void packForHoliday(Object child, Object ... things){} // compiler tells you that this method is never used
+	// this is because Java tries to use the most specific parameterlist it can find, and the one with String child is more specific
+	// Same applies in case of int and Integer 
+	public void payForHolida(int amount) { 
+		System.out.println("Primitive method is used");
+	}
+	public void payForHoliday(Integer amount) {
+		System.out.println("Wrapper class method is used");
+	}
+	
 	public static void main(String[] args) {
 		// Using a class imported from another package
 		Person jackie = new Person();
@@ -71,6 +104,11 @@ public class Methodology {
 		//$ReturnDollars_(); // cannot call a non-static method from a static method (main), need object reference
 		
 		Methodology m = new Methodology();
+		m.changeColor(m.cameleon);
+		System.out.println("Cameleon's color is " + m.cameleon);
+		m.changeColor(m.cameleons);
+		System.out.println("Cameleons array starts with " + m.cameleons[0]);
+		
 		m = null;
 		// This compiles and doesn't throw NullPointerException, because for static methods Java replaces object ref with type of object
 		m.packForHoliday(new Person()); 
@@ -78,6 +116,9 @@ public class Methodology {
 		
 		METHODS.add(1); // you can actually call methods on the constant, but you can't point that reference to another object
 		// METHODS = new ArrayList<>(); doesn't compile
+		
+		// Java is lazy so chooses the method without autoboxing if it's available
+		m.payForHolida(4);
 		
 	}
 
