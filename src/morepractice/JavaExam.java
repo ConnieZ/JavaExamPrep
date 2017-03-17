@@ -101,9 +101,16 @@ public class JavaExam {
 		        return -new Integer(m1.knownTricks).compareTo(new Integer(m2.knownTricks));
 		    }
 		});
+		
+		//Let's print how the Magicians ArrayList got sorted
 		for(Magician m : magicians){
 			System.out.println(m.knownTricks);
 		}
+		
+		// This failes to compile, because this constructor is private
+		// Magician mrGadget = new Magician("Pretty in Pinstriped"); 
+		
+		
 
 	}
 

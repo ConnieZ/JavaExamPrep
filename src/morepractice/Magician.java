@@ -13,11 +13,20 @@ public class Magician extends Person {
 	
 	public Magician(){
 		this(0);
+		// same as
+		// new Magician(0);
 	}
 	
-	public Magician(int tricks){
+	public Magician(int knownTricks){
 		super();
-		this.knownTricks = tricks;
+		this.knownTricks = knownTricks;
+		// if we didn't have this. , the instance variable wouldn't have been used, instead the more granular - parameter would be used
+	}
+	
+	// This private constructor is useful when a class only has static methods or the class wants to control all calls to create
+	// new instances of itself.
+	private Magician(String caseName){
+		System.out.println("This is a private Magician, he investigates clown crimes.");
 	}
 	
 	// This method demos ArrayList functionality
@@ -70,7 +79,7 @@ public class Magician extends Person {
 		List<Object> fixedList2 = Arrays.asList("HornedBunny","AlbinoRabbit","Dove");
 		// fixedList2.remove("Dove"); // Throws java.lang.UnsupportedOperationException	
 		
-		
+		Magician mrGadget = new Magician("Pretty in Pinstriped"); // this private constructor works fine inside Magician class
 	}
 	
 }

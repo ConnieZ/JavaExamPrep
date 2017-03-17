@@ -11,6 +11,9 @@ import morepractice.Person;
 
 public class Methodology {
 	
+	// public methodology(){} // this attempt at creating a constructor, doesn't compile, because it doesn't match the name of class
+	// and it doesn't have a return type like a regular method.
+	
 	//static final constants are named with all caps
 	public static final ArrayList<Integer> METHODS = new ArrayList<>(); // constants must be initialized 
 	
@@ -75,8 +78,9 @@ public class Methodology {
 	// this overloading works, because the assumption is that there will always be at least 2 args passed
 	// But it also implies that you can call packForHoliday(34), the value will be autoboxed to Integer
 	private void packForHoliday(Object child, Object ... things){} // compiler tells you that this method is never used
-	// this is because Java tries to use the most specific parameterlist it can find, and the one with String child is more specific
-	// Same applies in case of int and Integer 
+	// this is because Java tries to use the most specific parameter list it can find, and the one with String child is more specific
+	// Same applies in case of int and Integer, if the method with int isn't there, it will autobox to Integer, and if Integer isn't there
+	// It will try to use Object. Keep in mind that autoboxing doesn't count as conversion, as in case of int to long.
 	public void payForHolida(int amount) { 
 		System.out.println("Primitive method is used");
 	}
