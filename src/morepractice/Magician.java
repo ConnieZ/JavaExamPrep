@@ -9,7 +9,8 @@ public class Magician extends Person {
 	
 	public int knownTricks;
 	
-	ArrayList magicianObjects = new ArrayList(); // this will only allow Objects, and any primitives will be autoboxed - promoted to wrapper classes
+	ArrayList magicianObjects = new ArrayList(); // this will only allow Objects, and any primitives will be autoboxed 
+	// - promoted to wrapper classes
 	
 	public Magician(){
 		this(0);
@@ -39,7 +40,10 @@ public class Magician extends Person {
 		magicianObjects.add(Boolean.TRUE); // adding a duplicate works
 		System.out.println("Find true: " + magicianObjects.contains(true));
 		System.out.println(magicianObjects);
+		magicianObjects.add(Integer.parseInt("777")); // the parse method involves autoboxing
 		System.out.println(magicianObjects.remove(Integer.valueOf(42))); // proper way to remove int from ArrayList, because valueOf returns wrapper class
+		// , no autoboxing involved
+		System.out.println(magicianObjects.remove(Integer.valueOf(777)));
 		//System.out.println(magicianObjects.remove(42)); // this will attempt to remove the element at index 42 (no autoboxing rules for "remove")
 		System.out.println(magicianObjects.remove(true)); // removes only the first match of Boolean object
 		System.out.println(magicianObjects.remove("BlackRabbit")); // false (no match found)
@@ -65,6 +69,7 @@ public class Magician extends Person {
 		
 		// How ArrayList objects are sorted, same method, but different helper class
 		magicianObjects.add("69LeggedSpider");
+		// This justifies the statement "An array is ordered", because it can be.
 		Collections.sort(magicianObjects);
 		System.out.println(magicianObjects);
 
@@ -75,9 +80,14 @@ public class Magician extends Person {
 		// Think of it like this: "view array a AS LIST", but it's still an array
 		// Just that it has more API options: from array and from List (with exceptions)
 		List<String> fixedList = Arrays.asList(stringArray);
+		//List<String> list = stringArray.asList(); // this doesn't compile, because There is no asList() method on an array instance
+		
 		// This method also takes vararg as array, same rules apply
 		List<Object> fixedList2 = Arrays.asList("HornedBunny","AlbinoRabbit","Dove");
+		
+		// Remember what a fixed list means
 		// fixedList2.remove("Dove"); // Throws java.lang.UnsupportedOperationException	
+		
 		
 		Magician mrGadget = new Magician("Pretty in Pinstriped"); // this private constructor works fine inside Magician class
 	}

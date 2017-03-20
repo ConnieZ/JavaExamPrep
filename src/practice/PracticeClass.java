@@ -211,7 +211,7 @@ public class PracticeClass {
 		LocalDate now = LocalDate.now();
 		// The line of code won't compile with just 2 args
 		LocalDate d = LocalDate.of(2015, 5, 1);
-		// LocalDate.of(2015, Month.JANUARY, 32); // throws DateTimeException of invalid DayOfMonth
+		// LocalDate.of(2015, Month.JANUARY, 32); // compiles, but throws DateTimeException of invalid DayOfMonth
 		LocalDate date1 = LocalDate.of(2015, Month.JANUARY, 20); // Month is also class from java.time package
 		
 		// Date objects are immutable, so remember to assign the result to a var
@@ -225,7 +225,7 @@ public class PracticeClass {
 	    // System.out.println(lt.plus(period)); // compiles but throws exception of unsupported method
 
 	    LocalDateTime ldt = LocalDateTime.of(d, lt); // passing LocalDate object, and LocalTime object
-	    ldt = ldt.minusHours(10);
+	    ldt = ldt.minusHours(10); // you have to reassign the result of method back to object, otherwise the return value is ignored.
 	    System.out.println("Day of week: " + ldt.getDayOfWeek());
 	    System.out.println("Day of year: " + ldt.getDayOfYear());
 	    

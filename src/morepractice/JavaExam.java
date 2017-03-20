@@ -30,7 +30,8 @@ public class JavaExam {
 		String circusFolks[] = c.getCircusMembers();
 		c.printCircusMembers(); // prints how the instance var looks before sorting
 		
-		//Numbers sort before letters and uppercase sorts before lowercase,
+		// SORTING RULES
+		// Numbers sort before letters and uppercase sorts before lowercase,
 		Arrays.sort(circusFolks);
 		
 		// Notice, how we sorted by reference (the print method prints instance var
@@ -75,6 +76,7 @@ public class JavaExam {
 		
 		String g = "grep";
 		String p = g.replace("gr", "2two");
+		p += 2; // this works because it's just concatenation
 		System.out.println(p);
 		String a = new String();
 		System.out.println("New String object: " + new String());
@@ -101,6 +103,7 @@ public class JavaExam {
 		        return -new Integer(m1.knownTricks).compareTo(new Integer(m2.knownTricks));
 		    }
 		});
+		// This justifies the statement that ArrayList is indexed and sorted, because it can be sorted.
 		
 		//Let's print how the Magicians ArrayList got sorted
 		for(Magician m : magicians){
@@ -110,7 +113,20 @@ public class JavaExam {
 		// This failes to compile, because this constructor is private
 		// Magician mrGadget = new Magician("Pretty in Pinstriped"); 
 		
+		// Some more sorting practice
+		System.out.println("Some more sorting practice");
+		// These are strings, so first digits are compared, then second, where available.
+		// Numbers sort first, then uppercase, then lowercase
+		List<String> hex = Arrays.asList("30", "8", "3A", "FF");
+		Collections.sort(hex);
+		int x = Collections.binarySearch(hex, "8");
+		int y = Collections.binarySearch(hex, "3A");
+		int z = Collections.binarySearch(hex, "4F");
+		System.out.println(x + " " + y + " " + z);
 		
+		ArrayList<Integer> numbers = new ArrayList<>();
+		numbers.add(null);
+		//for (int n : numbers) System.out.print(n); // It would have worked fine with a String, but with int it throws NullPointerException
 
 	}
 
