@@ -7,12 +7,14 @@ import static java.util.Arrays.asList; // that way you can avoid specifying Arra
 // import static java.util.Arrays; // DOES NOT COMPILE
 // If we created an asList method in our class, Java would give it preference over the imported one
 
+import java.time.LocalDate;
+
 import morepractice.Person;
 
 public class Methodology {
 	
 	// public methodology(){} // this attempt at creating a constructor, doesn't compile, because it doesn't match the name of class
-	// and it doesn't have a return type like a regular method.
+	// and it doesn't have a return type like a regular method would.
 	
 	//static final constants are named with all caps
 	public static final ArrayList<Integer> METHODS = new ArrayList<>(); // constants must be initialized 
@@ -24,6 +26,7 @@ public class Methodology {
 		int numSecondsPerMinute = 60;
 		int numMinutesPerHour = 60;
 		NUMBER_SECONDS_PER_HOUR = numSecondsPerMinute * numMinutesPerHour;
+		System.out.println("First parent initialization. Second, static variables and initializers");
 	}
 	
 	//	There is a common case to use a static initializer: when you need to initialize a
@@ -31,11 +34,24 @@ public class Methodology {
 	//	when you want to initialize a collection like an ArrayList. When you do need to
 	//	use a static initializer, put all the static initialization in the same block.
 	
-	private String cameleon = "Blue";
+	// non-static final variables can also be initialized in a constructor
+	private final LocalDate holidayStart;
+	
+	public Methodology(){
+		// initializing a final variable
+		holidayStart = LocalDate.of(2017, 2, 25);
+		System.out.println("Lastly, constructor");
+
+	}
+	
+	private String cameleon;
+	{cameleon  = "Blue";
+	System.out.println("Third, instance variables and initializers");}
+	
 	public void changeColor(String cameleon){
 		// this won't reassign the instance variable to a new value, it only affects the local variable
 		cameleon = "Green";
-		System.out.println("Inside the method, the cameleon is " + cameleon);
+		System.out.println("Inside changeColor method, the cameleon is " + cameleon);
 	}
 	
 	
@@ -99,6 +115,11 @@ public class Methodology {
 		amy.name = "Amy";
 		// System.out.println(amy.dateOfBirth); // accessing a protected member, without extending the class or being in the same package fails.
 		
+		// Notice, that this statement will not be first output of main. Compiler figured out that we will use 
+		// Methodology class (regardless of creating an instance of class, i.e. object, just using methods is enough)
+		// This causes the first 2 steps of initialization to happen: 1) Parent initialization, 2) static variables and initializers.
+		System.out.println("First printed statement in main.");
+				
 		// Calling a static method from a static method (main) is legal
 		packForHoliday(jackie, "shorts", "jacket", "books");
 		packForHoliday(alice, new String[] {"sweather", "pijamas", "tablet"}); // passing an array is same as vargargs
@@ -107,11 +128,17 @@ public class Methodology {
 
 		//$ReturnDollars_(); // cannot call a non-static method from a static method (main), need object reference
 		
+		System.out.println("Demo of order of initialization");
+		// Notice, that the first 2 steps already finished, now because we are actually creating an object of Methodology
+		// the following occur: 3) instance vars and initializers run, and 4) constructor runs
 		Methodology m = new Methodology();
 		m.changeColor(m.cameleon);
 		System.out.println("Cameleon's color is " + m.cameleon);
 		m.changeColor(m.cameleons);
 		System.out.println("Cameleons array starts with " + m.cameleons[0]);
+		
+		// Java is lazy so chooses the method without autoboxing if it's available
+		m.payForHoliday(4);
 		
 		m = null;
 		// This compiles and doesn't throw NullPointerException, because for static methods Java replaces object ref with type of object
@@ -121,8 +148,7 @@ public class Methodology {
 		METHODS.add(1); // you can actually call methods on the constant, but you can't point that reference to another object
 		// METHODS = new ArrayList<>(); doesn't compile
 		
-		// Java is lazy so chooses the method without autoboxing if it's available
-		m.payForHolida(4);
+		
 		
 	}
 

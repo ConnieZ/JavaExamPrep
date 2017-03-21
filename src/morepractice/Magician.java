@@ -14,8 +14,8 @@ public class Magician extends Person {
 	
 	public Magician(){
 		this(0);
-		// same as
-		// new Magician(0);
+		// NOT the same as
+		// new Magician(0); // this just creates an instance, that is completely ignored, remember, constructors don't actually return anything.
 	}
 	
 	public Magician(int knownTricks){
