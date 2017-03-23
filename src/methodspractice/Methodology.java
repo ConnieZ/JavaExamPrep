@@ -21,7 +21,8 @@ public class Methodology {
 	
 	private static final int NUMBER_SECONDS_PER_HOUR; // it ok to postpone initialization until static initializer block
 	// Static initializers - a block of code with static keyword 
-	// They will be run when the class is first used.
+	// They will be run when the class is first "used".
+	// That includes running a main() method inside a class, even if it's empty
 	static {
 		int numSecondsPerMinute = 60;
 		int numMinutesPerHour = 60;
@@ -148,7 +149,17 @@ public class Methodology {
 		METHODS.add(1); // you can actually call methods on the constant, but you can't point that reference to another object
 		// METHODS = new ArrayList<>(); doesn't compile
 		
+		// Demonstration of ImmutableClass
+		StringBuilder mold = new StringBuilder("initial value");
+		ImmutableClass stable = new ImmutableClass(mold);
+		StringBuilder newMold = stable.getDiamond().append(" added value");
+		System.out.println("Immutable after molding " + stable.getDiamond());
 		
+		// Demonstration of MutableClass
+		MutableClass inStable = new MutableClass(mold);
+		StringBuilder newMold2 = inStable.getFakeDiamond().append(" added value");
+		System.out.println("Mutable after molding " + inStable.getFakeDiamond());
+		System.out.println("Mold after molding " + mold);
 		
 	}
 
