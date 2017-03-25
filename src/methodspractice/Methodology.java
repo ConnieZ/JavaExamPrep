@@ -161,6 +161,10 @@ public class Methodology {
 		System.out.println("Mutable after molding " + inStable.getFakeDiamond());
 		System.out.println("Mold after molding " + mold);
 		
+		
+		// Demo of map reduce in Java using lambdas
+		new Grid().processReduction();
+		
 	}
 
 }
