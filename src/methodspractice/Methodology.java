@@ -163,8 +163,22 @@ public class Methodology {
 		
 		
 		// Demo of map reduce in Java using lambdas
-		new Grid().processReduction();
+		Grid g = new Grid();
+		g.processReduction();
+		g.sortCoordinates(g.coords);
+		g.printCoordinates(g.coords);
 		
+		
+		// Demo of lambdas
+		LambdaSorority ls = new LambdaSorority();
+		
+		// We created an overloaded method to process applications, this method 
+		// takes a list of applicants and a Predicate type of expression
+		ls.processApplications(ls.applicants, p -> p.isFemale());
+		
+		// this method takes only the Predicate type of expression
+		// but the parameter is defined as AcceptableToSorority interface 
+		ls.processApplications(p -> p.isFemale());
 	}
 
 }
