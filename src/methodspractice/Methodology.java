@@ -115,6 +115,8 @@ public class Methodology {
 		Person amy = new Person();
 		amy.name = "Amy";
 		// System.out.println(amy.dateOfBirth); // accessing a protected member, without extending the class or being in the same package fails.
+		// Person ashley = new Person("Ashley", true, LocalDate.of(1998, 2, 2)); // this overloaded constructor is package-specific so not visible here
+		// System.out.println(ashley.numPeople); // this compiles even if ashley declaration fails
 		
 		// Notice, that this statement will not be first output of main. Compiler figured out that we will use 
 		// Methodology class (regardless of creating an instance of class, i.e. object, just using methods is enough)
@@ -124,9 +126,12 @@ public class Methodology {
 		// Calling a static method from a static method (main) is legal
 		packForHoliday(jackie, "shorts", "jacket", "books");
 		packForHoliday(alice, new String[] {"sweather", "pijamas", "tablet"}); // passing an array is same as vargargs
+		// packForHoliday(alice, {"sweather", "jeans"}); // doesn't compile because array declaration is wrong
 		packForHoliday(amy); // if we don't pass vargargs or array, Java creates one of length 0
 		// packForHoliday(amy, null); // compiles but throws NullPointerException, because method's body tries to access the null object
-
+		
+		// System.out.println("Leaving hometown: " + amy.homeTown); // homeTown is package-private, so not visible here.
+		
 		//$ReturnDollars_(); // cannot call a non-static method from a static method (main), need object reference
 		
 		System.out.println("Demo of order of initialization");
