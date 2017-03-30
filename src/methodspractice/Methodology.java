@@ -2,7 +2,8 @@ package methodspractice;
 
 import java.util.ArrayList;
 import java.util.List;
-//Static imports are for importing static members of classes only, and not the classes themselves.
+// Static imports are for importing static members of classes only, and not the classes themselves.
+// Static imports of methods do not need specifying paramters, just the name of the method
 import static java.util.Arrays.asList; // that way you can avoid specifying Arrays. when using asList(), in fact Arrays.asList() won't compile
 // import static java.util.Arrays; // DOES NOT COMPILE
 // If we created an asList method in our class, Java would give it preference over the imported one
@@ -46,8 +47,18 @@ public class Methodology {
 	}
 	
 	private String cameleon;
-	{cameleon  = "Blue";
-	System.out.println("Third, instance variables and initializers");}
+	{
+		cameleon  = "Blue";
+		System.out.println("Third, instance variables and initializers");
+	}
+	
+	
+	// Demo of passing by reference: the reassignment of cameleon to a new object makes sure the original variable is unaffected
+	public StringBuilder dropCameleonTail(StringBuilder cameleon){
+		cameleon = new StringBuilder("Cameleon with tail");
+		cameleon.insert(13, "out");
+		return cameleon;
+	}
 	
 	public void changeColor(String cameleon){
 		// this won't reassign the instance variable to a new value, it only affects the local variable
@@ -82,6 +93,9 @@ public class Methodology {
 	// A vararg parameter must be the last element in a method’s parameter list. 
 	// You are only allowed to have one vararg parameter per method.
 	public static void packForHoliday(Person child, Object ... things){
+		// this.LocalDate = LocalDate.of(2016, 2, 3); // cannot use this.attribute in a static context, doesn't compile
+		// because it wouldn't be clear to which instance you are referring to, unlike in non-static methods, when it's clear
+		
 		List<Object> bag = new ArrayList<>();
 		for(Object thing : things){
 			bag.add(thing);
@@ -142,6 +156,12 @@ public class Methodology {
 		System.out.println("Cameleon's color is " + m.cameleon);
 		m.changeColor(m.cameleons);
 		System.out.println("Cameleons array starts with " + m.cameleons[0]);
+		// Demo of passing by reference
+		StringBuilder cameleon = new StringBuilder("Long cameleon");
+		StringBuilder poorCameleon = m.dropCameleonTail(cameleon);
+		// The method didn't affect the original variable, because reassignment to new object happened within the method
+		System.out.println("Cameleon before tail drop: " + cameleon);
+		System.out.println("Poor cameleon: " + poorCameleon);
 		
 		// Java is lazy so chooses the method without autoboxing if it's available
 		m.payForHoliday(4);
@@ -153,6 +173,8 @@ public class Methodology {
 		
 		METHODS.add(1); // you can actually call methods on the constant, but you can't point that reference to another object
 		// METHODS = new ArrayList<>(); doesn't compile
+		
+		StringBuilder cameleonTail = new StringBuilder("Long cameleon");
 		
 		// Demonstration of ImmutableClass
 		StringBuilder mold = new StringBuilder("initial value");
