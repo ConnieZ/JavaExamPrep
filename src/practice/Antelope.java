@@ -3,14 +3,19 @@ package practice;
 public class Antelope extends Mammal implements WalksOn4Legs, WearsHorns {
 	
 	public Antelope(String name){
+		// the first line of every constructor is always super(...), even you don't see it, unless you call this()
 		// if present, this() or super() has to be the first statement in a constructor
-		// and the class must have a no-arg constructor defined (default doesn't apply if this constructor is defined)
-		this();
+		// and the class must have a no-arg constructor defined (default constructor 
+		// isn't created by compiler if this constructor is defined)
+		this(); // parent constructor call (super) will only execute once in this situation (for the constructor referenced by this())
+		// super(); // won't compile if not the first line in constructor
 		System.out.println("Antelope " + name + " was born!");
 	}
 	
 	public Antelope(){
-		
+		// super(); // this is not mandatory, because Java compiler will always insert that call if the first 
+		// statement is not a call to parent constructor
+		System.out.println("Antelope Constructor with no args is called");
 	}
 	
 	// Inhereted from interface
@@ -51,7 +56,7 @@ public class Antelope extends Mammal implements WalksOn4Legs, WearsHorns {
 		return true;
 	}
 	
-	// Inhereted from interface
+	// Inherited from interface
 	public int getNumberOfHorns(){
 		return 2;
 	}
@@ -63,7 +68,9 @@ public class Antelope extends Mammal implements WalksOn4Legs, WearsHorns {
 	
 	// This implementation uses a less restrictive access modifier - protected vs. default
 	protected Long getOffsprings(){
-		return (long) numberOfOffspring;
+		// this shows that you can use both this and super to reference a member inherited from parent class
+		numberOfOffspring = 4;
+		return (long) super.numberOfOffspring;
 	
 	}	
 	// This won't compile because we cannot reduce visibility of inherited method

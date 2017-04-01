@@ -148,7 +148,7 @@ public class PracticeClass {
 		
 		// We create a single object of type Antelope, but it will be referenced by
 		// different types of references
-		Mammal antelope = new Antelope();
+		Mammal antelope = new Antelope("Anty");
 		// This compiles because WalksOn4Legs is a subclass of Object
 		WalksOn4Legs walksOn4Legs = (WalksOn4Legs) antelope;
 		WearsHorns wearsHorns = (WearsHorns) walksOn4Legs;
@@ -160,7 +160,8 @@ public class PracticeClass {
 		// Antelope anty = antelope;
 		Antelope anty = (Antelope) antelope;
 		System.out.println("Anty points to same object as antelope: " + (antelope == anty) + " and " + (antelope.equals(anty)));
-		
+		System.out.println("Number of offsprings Anty has: " + anty.getOffsprings());
+
 		// This won't compile because antelope is referenced by Mammal var
 		// And Mammal class doesn't have the method from Antelope class
 		// antelope.getEatenByLion();
@@ -225,7 +226,7 @@ public class PracticeClass {
 	    // System.out.println(lt.plus(period)); // compiles but throws exception of unsupported method
 
 	    LocalDateTime ldt = LocalDateTime.of(d, lt); // passing LocalDate object, and LocalTime object
-	    ldt = ldt.minusHours(10); // you have to reassign the result of method back to object, otherwise the return value is ignored.
+	    ldt = ldt.minusHours(10); // you have to reassign the result of method back to object, otherwise the return value  is ignored.
 	    System.out.println("Day of week: " + ldt.getDayOfWeek());
 	    System.out.println("Day of year: " + ldt.getDayOfYear());
 	    

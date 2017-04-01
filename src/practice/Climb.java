@@ -1,5 +1,6 @@
 package practice;
 
+// There can be at most one public top level class or interface in a Java file.
 interface Climb {
 	// this method follows JavaBean naming convention
 	// for boolean-returning methods

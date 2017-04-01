@@ -65,6 +65,7 @@ public class Chicken {
 	
 	// This is an inner class, it can be static
 	// Only a nested class can be static
+	// Only inner classes can be private and protected (not top-level classes)
 	public static class Chick{
 		// A static nested class has access to only static members
 		// of the outer class
